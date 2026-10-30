@@ -56,7 +56,7 @@ export default function Hero() {
         <div className={s.stage} aria-hidden>
           <div className={s.orb} />
           <Scene />
-          <span className={s.stageNote}>Your office, running while you work</span>
+          <span className={s.stageNote}>The office at 9 PM. Not yours anymore.</span>
         </div>
       </div>
 

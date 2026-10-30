@@ -27,8 +27,12 @@
 .avatars span:first-child { margin-left: 0; }
 
 .stage { position: relative; height: clamp(420px, 60vh, 680px); }
+.stage :global(canvas) {
+  -webkit-mask-image: radial-gradient(ellipse 64% 60% at 50% 52%, #000 32%, rgba(0,0,0,.55) 58%, transparent 80%);
+  mask-image: radial-gradient(ellipse 64% 60% at 50% 52%, #000 32%, rgba(0,0,0,.55) 58%, transparent 80%);
+}
 .orb {
-  position: absolute; width: 60%; aspect-ratio: 1; left: 20%; top: 20%; border-radius: 50%;
+  position: absolute; width: 70%; aspect-ratio: 1; left: 15%; top: 15%; border-radius: 50%;
   background: radial-gradient(circle at 40% 35%, rgba(255,107,44,.55), rgba(255,107,44,0) 60%);
   filter: blur(40px); opacity: .7;
 }
@@ -56,7 +60,7 @@
 
 @media (max-width: 960px) {
   .inner { grid-template-columns: 1fr; gap: 10px; }
-  .stage { height: clamp(300px, 46vw, 420px); order: -1; margin-top: 0; }
+  .stage { height: clamp(340px, 60vw, 460px); order: -1; margin-top: 0; }
   .scroll { display: none; }
   .hero { padding-bottom: 96px; }
 }
