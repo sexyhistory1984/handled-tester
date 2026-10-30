@@ -1,0 +1,24 @@
+.head { max-width: 760px; margin-bottom: clamp(40px, 5vw, 72px); }
+.head h2 { margin: 22px 0 18px; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.card {
+  --mx: 50%; --my: 50%;
+  position: relative; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 30px 28px; overflow: hidden;
+  min-height: 300px; display: flex; flex-direction: column; gap: 18px;
+  transition: transform .5s var(--ease), box-shadow .5s var(--ease), border-color .3s;
+}
+.card::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .4s;
+  background: radial-gradient(360px circle at var(--mx) var(--my), rgba(255,107,44,.14), transparent 60%);
+}
+.card:hover { transform: translateY(-5px); box-shadow: 0 40px 70px -40px rgba(20,22,28,.4); border-color: rgba(20,22,28,.2); }
+.card:hover::before { opacity: 1; }
+.icon { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; background: var(--navy); color: var(--cream); }
+.card:hover .icon { background: var(--accent); }
+.icon { transition: background .35s; }
+.card h3 { font-size: 24px; }
+.card p { color: var(--ink-2); font-size: 16px; flex: 1; }
+.eg { font-size: 14px; color: var(--gray); padding-top: 14px; border-top: 1px dashed var(--line); }
+.eg b { color: var(--ink); font-weight: 600; }
+@media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .grid { grid-template-columns: 1fr; } .card { min-height: 0; } }

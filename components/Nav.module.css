@@ -1,0 +1,43 @@
+.nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  transition: background .4s, backdrop-filter .4s, border-color .4s, padding .4s;
+  border-bottom: 1px solid transparent;
+  padding-block: 18px;
+  color: var(--cream);
+}
+.nav.scrolled {
+  background: rgba(10, 15, 30, 0.72);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  border-color: var(--line-dark);
+  padding-block: 12px;
+}
+.inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.logo {
+  font-family: var(--font-display); font-weight: 800; font-size: 24px; letter-spacing: -0.04em;
+  display: inline-flex; align-items: baseline; gap: 2px;
+}
+.logo i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); transform: translateY(-1px); }
+.links { display: flex; gap: 30px; font-size: 15px; font-weight: 500; }
+.links a { opacity: .78; transition: opacity .25s; position: relative; }
+.links a:hover { opacity: 1; }
+.links a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 1px;
+  background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease);
+}
+.links a:hover::after { transform: scaleX(1); }
+.cta { padding: 12px 18px; font-size: 15px; }
+.burger {
+  display: none; background: none; border: 1px solid var(--line-dark); color: inherit;
+  width: 44px; height: 44px; border-radius: 50%; align-items: center; justify-content: center;
+}
+.sheet {
+  position: fixed; inset: 0; background: var(--navy); color: var(--cream); z-index: 60;
+  display: flex; flex-direction: column; justify-content: center; padding: var(--gutter);
+  gap: 18px; font-family: var(--font-display); font-size: clamp(32px, 9vw, 48px); font-weight: 700; letter-spacing: -0.03em;
+}
+.close { position: absolute; top: 18px; right: var(--gutter); background: none; border: 1px solid var(--line-dark); color: inherit; width: 44px; height: 44px; border-radius: 50%; }
+@media (max-width: 900px) {
+  .links, .cta { display: none; }
+  .burger { display: inline-flex; }
+}

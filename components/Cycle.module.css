@@ -1,0 +1,59 @@
+.layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+.sticky { position: sticky; top: 110px; }
+.sticky h2 { margin: 22px 0 18px; }
+.steps { list-style: none; margin: 36px 0 0; padding: 0; display: grid; gap: 4px; counter-reset: step; }
+.step {
+  display: grid; grid-template-columns: 36px 1fr auto; align-items: center; gap: 14px; width: 100%;
+  background: none; border: 0; color: inherit; text-align: left; padding: 14px 16px; border-radius: 14px;
+  transition: background .3s, color .3s; position: relative;
+}
+.step:hover { background: rgba(244,239,230,.05); }
+.step.active { background: rgba(244,239,230,.08); }
+.step .idx { font-size: 12px; letter-spacing: .1em; color: rgba(244,239,230,.45); font-weight: 600; }
+.step.active .idx { color: var(--accent); }
+.step .name { font-family: var(--font-display); font-weight: 600; font-size: 20px; letter-spacing: -0.02em; }
+.step .bar { width: 44px; height: 2px; background: rgba(244,239,230,.15); border-radius: 2px; overflow: hidden; }
+.step .bar i { display: block; height: 100%; width: 0; background: var(--accent); }
+.step.active .bar i { animation: fill var(--dur) linear forwards; }
+.step.paused .bar i { animation-play-state: paused; width: 100%; }
+@keyframes fill { to { width: 100%; } }
+
+.panel {
+  background: var(--navy-2); border: 1px solid var(--line-dark); border-radius: 28px; padding: clamp(28px, 3.2vw, 44px);
+  min-height: 520px; display: grid; grid-template-rows: auto 1fr; gap: 28px; position: relative; overflow: hidden;
+}
+.panel::before {
+  content: ""; position: absolute; inset: auto -20% -40% auto; width: 60%; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,107,44,.28), transparent 65%); filter: blur(30px); pointer-events: none;
+}
+.panelHead { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+.panelHead h3 { font-size: clamp(26px, 2.6vw, 36px); }
+.panelHead span { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: rgba(244,239,230,.45); white-space: nowrap; }
+.body { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+.body p { color: rgba(244,239,230,.74); font-size: 17px; }
+.list { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 10px; }
+.list li { display: flex; gap: 10px; align-items: flex-start; color: rgba(244,239,230,.9); font-size: 15px; }
+.list li::before { content: ""; flex: 0 0 auto; width: 18px; height: 18px; margin-top: 2px; border-radius: 50%; background: var(--accent-soft); border: 1px solid var(--accent);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'><path d='M5 9.5l2.5 2.5L13 6.5' fill='none' stroke='%23ff6b2c' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg>"); }
+
+/* mock UI */
+.mock { background: var(--navy); border: 1px solid var(--line-dark); border-radius: 18px; padding: 18px; font-size: 14px; display: grid; gap: 10px; box-shadow: 0 30px 60px -30px rgba(0,0,0,.8); }
+.mockTop { display: flex; justify-content: space-between; align-items: center; color: rgba(244,239,230,.5); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding-bottom: 10px; border-bottom: 1px solid var(--line-dark); }
+.row { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; padding: 12px 14px; border-radius: 12px; background: rgba(244,239,230,.04); }
+.row b { display: block; font-weight: 600; color: var(--cream); }
+.row small { color: rgba(244,239,230,.55); font-size: 13px; }
+.pill { font-size: 12px; font-weight: 600; padding: 6px 10px; border-radius: 999px; white-space: nowrap; }
+.pill.ok { background: rgba(70, 200, 140, .15); color: #6fe0a8; }
+.pill.wait { background: var(--accent-soft); color: var(--accent); }
+.pill.you { background: rgba(138,160,255,.15); color: #a8b8ff; }
+
+@media (max-width: 960px) {
+  .layout { grid-template-columns: 1fr; }
+  .sticky { position: static; }
+  .steps { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+  .step { grid-template-columns: 1fr; gap: 6px; padding: 12px; border: 1px solid var(--line-dark); }
+  .step .bar { display: none; }
+  .step .name { font-size: 15px; }
+  .body { grid-template-columns: 1fr; }
+  .panel { min-height: 0; }
+}
