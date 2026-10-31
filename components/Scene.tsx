@@ -176,13 +176,13 @@ function PaperPile({ cupLocal }: { cupLocal: Cup }) {
   const drapes = useMemo(() => {
     // the loose sheets: index in the pile, overhang and direction. The big one at mid-height reaches the cup.
     const list: Array<{ idx: number; cx: number; cz: number; yaw: number; w: number; d: number; k: number; kind: "blank" | "form" | "invoice"; cup?: boolean; curl?: number; approach?: [number, number] }> = [
-      { idx: 330, cx: 0.82, cz: 0.3, yaw: 0.12, w: 1.7, d: 2.2, k: 1.5, kind: "form", cup: true, approach: [1, 0.2] },
-      { idx: 60, cx: 0.32, cz: -0.1, yaw: -0.05, w: 1.7, d: 2.2, k: 0.8, kind: "blank" },
+      { idx: 330, cx: -0.72, cz: 0.35, yaw: 0.1, w: 1.7, d: 2.2, k: 1.1, kind: "form" },
+      { idx: 60, cx: -0.3, cz: 0.45, yaw: -0.05, w: 1.7, d: 2.2, k: 0.8, kind: "blank" },
       { idx: 120, cx: -0.3, cz: 0.42, yaw: 0.08, w: 1.7, d: 2.2, k: 0.8, kind: "blank" },
       { idx: 170, cx: -0.42, cz: -0.35, yaw: -0.12, w: 1.7, d: 2.2, k: 0.85, kind: "blank" },
-      { idx: 260, cx: 0.2, cz: 0.5, yaw: 0.2, w: 1.7, d: 2.2, k: 0.8, kind: "blank" },
+      { idx: 260, cx: 0.15, cz: 0.55, yaw: 0.2, w: 1.7, d: 2.2, k: 0.8, kind: "blank" },
       { idx: 300, cx: -0.5, cz: 0.1, yaw: 0.05, w: 1.7, d: 2.8, k: 0.75, kind: "blank" },
-      { idx: 215, cx: 0.36, cz: -0.42, yaw: -0.25, w: 1.7, d: 2.2, k: 0.85, kind: "blank" },
+      { idx: 215, cx: -0.4, cz: -0.3, yaw: -0.2, w: 1.7, d: 2.2, k: 0.85, kind: "blank" },
       { idx: 372, cx: -0.1, cz: 0.3, yaw: 0.1, w: 1.7, d: 2.2, k: 0.8, kind: "blank", curl: 0.05 },
       { idx: SHEETS, cx: 0.03, cz: -0.02, yaw: 0.06, w: 1.7, d: 2.2, k: 0.8, kind: "invoice", curl: 0.07 },
     ];
@@ -205,7 +205,7 @@ function PaperPile({ cupLocal }: { cupLocal: Cup }) {
       else if (r < 0.05) { w = 1.8; d = 2.4; th = T * 1.6; col = new THREE.Color("#cfae7a"); }   // manila envelope
       else if (r < 0.14) { w = 1.9; d = 0.83; th = T * 1.4; col = new THREE.Color("#f6f3ec"); ox = (Math.random() - 0.5) * 0.3; oz = (Math.random() - 0.5) * 1.2; } // #10 envelope
       else if (r < 0.19) { w = 0.62; d = 1.0 + Math.random() * 0.8; col = new THREE.Color("#fafaf6"); ox = (Math.random() - 0.5) * 0.9; oz = (Math.random() - 0.5) * 0.8; } // receipt
-      else if (r < 0.23) { d = 2.8; oz = -0.3; }                                                 // legal, sticks out the back
+      else if (r < 0.23) { d = 2.8; oz = 0.3; }                                                 // legal, sticks out the back
       else if (r < 0.3) { ox = (Math.random() - 0.5) * 0.22; oz = (Math.random() - 0.5) * 0.22; }   // small shifts only: a 1 cm overhang doesn't sag
       p.set(dx + jx + ox, i * T + T / 2, dz + jz + oz);
       q.setFromEuler(new THREE.Euler(0, ry + jr, 0));
@@ -329,7 +329,7 @@ function Look() {
     const aspect = size.width / size.height;
     const z = aspect > 1.15 ? 5.2 + (aspect - 1.15) * 1.8 : 5.2;
     camera.position.set(0.55 * (z / 5.2), 3.0 * (z / 5.2), z);
-    camera.lookAt(0.15, 0.25, -0.05);
+    camera.lookAt(0.15, 0.25, -0.3);
     camera.updateProjectionMatrix();
   }, [camera, size]);
   return null;
@@ -344,7 +344,7 @@ class Catch extends Component<{ children: ReactNode }, { err: unknown }> {
 
 /* world layout */
 const PILE = { x: -0.85, z: -0.15, yaw: 0.25 };
-const CUP_POS = { x: 0.62, z: 0.62 };
+const CUP_POS = { x: 1.05, z: -1.25 };
 
 export default function Scene() {
   const wood = useMemo(() => woodTexture(), []);
@@ -380,10 +380,10 @@ export default function Scene() {
           </AccumulativeShadows>
           <group position={[PILE.x, 0, PILE.z]} rotation={[0, PILE.yaw, 0]}><PaperPile cupLocal={cupLocal} /></group>
           <group position={[CUP_POS.x, 0, CUP_POS.z]}><Cup /></group>
-          <group position={[1.55, 0.04, -0.2]} rotation={[-Math.PI / 2, 0, -0.45]}><Phone /></group>
+          <group position={[1.6, 0.04, -0.05]} rotation={[-Math.PI / 2, 0, -0.45]}><Phone /></group>
         </Rig>
         <EffectComposer multisampling={4}>
-          <DepthOfField target={[0.2, 0.4, 0.3]} focalLength={0.045} bokehScale={1.5} />
+          <DepthOfField target={[0.1, 0.35, -0.2]} focalLength={0.04} bokehScale={1.3} />
           <Bloom intensity={0.3} luminanceThreshold={0.85} luminanceSmoothing={0.3} mipmapBlur />
           <HueSaturation saturation={-0.06} />
           <BrightnessContrast brightness={0.03} contrast={0.05} />
