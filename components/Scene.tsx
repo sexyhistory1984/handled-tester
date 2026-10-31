@@ -176,13 +176,13 @@ function PaperPile({ cupLocal }: { cupLocal: Cup }) {
   const drapes = useMemo(() => {
     // the loose sheets: index in the pile, overhang and direction. The big one at mid-height reaches the cup.
     const list: Array<{ idx: number; cx: number; cz: number; yaw: number; w: number; d: number; k: number; kind: "blank" | "form" | "invoice"; cup?: boolean; curl?: number; approach?: [number, number] }> = [
-      { idx: 215, cx: 0.78, cz: 0.3, yaw: 0.12, w: 1.7, d: 2.2, k: 0.9, kind: "form", cup: true, approach: [1, 0.2] },
+      { idx: 330, cx: 0.82, cz: 0.3, yaw: 0.12, w: 1.7, d: 2.2, k: 1.5, kind: "form", cup: true, approach: [1, 0.2] },
       { idx: 60, cx: 0.32, cz: -0.1, yaw: -0.05, w: 1.7, d: 2.2, k: 0.8, kind: "blank" },
       { idx: 120, cx: -0.3, cz: 0.42, yaw: 0.08, w: 1.7, d: 2.2, k: 0.8, kind: "blank" },
       { idx: 170, cx: -0.42, cz: -0.35, yaw: -0.12, w: 1.7, d: 2.2, k: 0.85, kind: "blank" },
       { idx: 260, cx: 0.2, cz: 0.5, yaw: 0.2, w: 1.7, d: 2.2, k: 0.8, kind: "blank" },
       { idx: 300, cx: -0.5, cz: 0.1, yaw: 0.05, w: 1.7, d: 2.8, k: 0.75, kind: "blank" },
-      { idx: 340, cx: 0.36, cz: -0.42, yaw: -0.25, w: 1.7, d: 2.2, k: 0.85, kind: "blank" },
+      { idx: 215, cx: 0.36, cz: -0.42, yaw: -0.25, w: 1.7, d: 2.2, k: 0.85, kind: "blank" },
       { idx: 372, cx: -0.1, cz: 0.3, yaw: 0.1, w: 1.7, d: 2.2, k: 0.8, kind: "blank", curl: 0.05 },
       { idx: SHEETS, cx: 0.03, cz: -0.02, yaw: 0.06, w: 1.7, d: 2.2, k: 0.8, kind: "invoice", curl: 0.07 },
     ];
